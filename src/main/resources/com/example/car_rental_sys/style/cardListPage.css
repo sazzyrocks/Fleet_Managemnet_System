@@ -1,0 +1,43 @@
+#scrollPane{
+    /*-fx-background: #151515;*/
+    /*-fx-border-color: #151515;*/
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 1
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+#backBtn:hover{
+    -fx-cursor: hand;
+}
+
+#textArea{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+/*    set textArea background*/
+
+}
+
+.text-area{
+    -fx-text-fill: #f6f6f6 !important;
+    -text-area-background: #151515 !important;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-insets: 0;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.text-area .content {
+    -fx-background-color: #151515 !important;
+}
+
+#sendIcon:hover{
+    -fx-cursor: hand;
+}

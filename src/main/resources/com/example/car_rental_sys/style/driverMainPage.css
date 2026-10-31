@@ -1,0 +1,80 @@
+#callIcon{
+    -fx-graphic: url("../image/UI/phoneCall.png");
+}
+
+.phoneCall{
+    -fx-background-image: url("../image/UI/phoneCall.png");
+}
+
+#messageIcon{
+    -fx-graphic: url("../image/UI/sendMessage.png");
+    -fx-font-size: 20px;
+}
+
+.scroll-pane{
+    -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+#closeSideBarPane:hover{
+    -fx-cursor: hand;
+}
+
+#phonePane:hover{
+    -fx-cursor: hand;
+}
+
+
+#messagePane:hover{
+    -fx-cursor: hand;
+}
+
+.leftIcon:hover{
+    -fx-cursor: hand;
+}
+
+.menuItem:hover{
+    -fx-cursor: hand;
+}
+
+.menuItemActive{
+    -fx-background-color:  #d9e993 !important;
+}
+
+.menuImagePane{
+    -fx-background-color: #d9e993;
+    -fx-background-radius: 8px;
+}
+
+#processImagePane:hover{
+    -fx-cursor: hand;
+}
+
+.sidebarIconActive{
+    -fx-background-color: #04aa4e !important;
+    -fx-effect:  dropshadow(gaussian, rgba(202, 233, 67,0.3), 40, 0.3, 0, 0) !important;
+}
+
+.sidebarIconNormal:hover{
+    -fx-cursor: hand;
+}
+
+#userAvatar:hover{
+    -fx-cursor: hand;
+}
+
+#customerSideBarUpdateBtn:hover{
+    -fx-cursor: hand;
+}
+
+
+.barActive{
+    -fx-background-color: #FFB84D !important;
+}
+
+.hand:hover{
+    -fx-cursor: hand;
+}
