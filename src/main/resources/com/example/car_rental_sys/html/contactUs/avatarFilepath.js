@@ -1,0 +1,1 @@
+let currentUserAvatarPath='avatar/10.png';

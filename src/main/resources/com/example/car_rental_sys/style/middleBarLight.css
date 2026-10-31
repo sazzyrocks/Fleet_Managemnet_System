@@ -1,0 +1,21 @@
+.defaultMiddleBtnStyle{
+    -fx-background-color: transparent;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    -fx-text-fill: #4e5969;
+}
+
+.btnMiddleFocusStyle, .defaultMiddleBtnStyle:hover{
+    -fx-background-color: #e8f7ff !important;
+    -fx-cursor: hand;
+    -fx-alignment: center-left;
+    -fx-text-fill: #4e5969;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-color: #57a9fb;
+    -fx-border-style: hidden hidden hidden solid;
+    -fx-padding: 0 0 0 15;
+}
+
+#lblSettings, #lblInformation{
+    -fx-text-fill: #1d2129;
+}
