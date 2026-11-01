@@ -122,12 +122,24 @@ public class RentalService {
 
     public boolean confirmBooking(Integer orderId) {
         if (orderId == null) return false;
-        return updateOrderStatus(orderId, OrderStatus.CONFIRMED);
+        boolean updated = updateOrderStatus(orderId, OrderStatus.CONFIRMED);
+        if (updated) {
+            orderDAO.findById(orderId).ifPresent(order -> {
+                vehicleDAO.updateStatus(order.getVehicleId(), VehicleStatus.RENTED);
+            });
+        }
+        return updated;
     }
 
     public boolean completeBooking(Integer orderId) {
         if (orderId == null) return false;
-        return updateOrderStatus(orderId, OrderStatus.COMPLETED);
+        boolean updated = updateOrderStatus(orderId, OrderStatus.COMPLETED);
+        if (updated) {
+            orderDAO.findById(orderId).ifPresent(order -> {
+                vehicleDAO.updateStatus(order.getVehicleId(), VehicleStatus.AVAILABLE);
+            });
+        }
+        return updated;
     }
 
     public boolean updateOrderStatus(int orderId, OrderStatus status) {

@@ -60,7 +60,14 @@ public class dashboardController extends Controller {
             try {
                 VehicleService vehicleService = ServiceFactory.getInstance().getVehicleService();
                 long totalVehicles = vehicleService.getAllVehicles().size();
-                long rentedVehicles = vehicleService.getFleetCountByStatus(VehicleStatus.RENTED);
+
+                java.util.List<com.example.car_rental_sys.model.Order> confirmedOrders = 
+                        DAOFactory.getInstance().getOrderDAO().findByStatus(OrderStatus.CONFIRMED);
+                for (com.example.car_rental_sys.model.Order order : confirmedOrders) {
+                    vehicleService.updateVehicleStatus(order.getVehicleId(), VehicleStatus.RENTED);
+                }
+
+                long rentedVehicles = Math.max((long) confirmedOrders.size(), vehicleService.getFleetCountByStatus(VehicleStatus.RENTED));
                 long maintenance = vehicleService.getFleetCountByStatus(VehicleStatus.MAINTENANCE);
 
                 BigDecimal revenue = ServiceFactory.getInstance().getPaymentService().getTotalRevenue();
