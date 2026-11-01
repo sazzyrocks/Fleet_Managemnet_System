@@ -24,6 +24,19 @@ public final class DatabaseInitializer {
         // Prevent instantiation of utility class
     }
 
+    private static boolean tablesAlreadyExist() {
+        String sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'fleet_management_db' AND table_name = 'vehicles'";
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
+             Statement stmt = conn.createStatement();
+             java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
+
     private static void ensureDatabaseExists() {
         try {
             DatabaseConnection dbConn = DatabaseConnection.getInstance();
@@ -68,6 +81,16 @@ public final class DatabaseInitializer {
     public static boolean initializeDatabase() {
         LOGGER.info("Starting automated database schema verification...");
         ensureDatabaseExists();
+
+        if (tablesAlreadyExist()) {
+            LOGGER.info("Database schema already initialized. Preserving existing fleet data.");
+            try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
+                ensureAdminUser(conn);
+            } catch (Exception ignored) {
+            }
+            return true;
+        }
+
         try (InputStream in = DatabaseInitializer.class.getClassLoader().getResourceAsStream(SCHEMA_FILE)) {
             if (in == null) {
                 LOGGER.log(Level.WARNING, "Schema file {0} not found on classpath. Skipping automatic initialization.", SCHEMA_FILE);

@@ -1,5 +1,8 @@
 package com.example.car_rental_sys.controllers;
 
+import com.example.car_rental_sys.model.Role;
+import com.example.car_rental_sys.model.User;
+import com.example.car_rental_sys.service.ServiceFactory;
 import com.example.car_rental_sys.util.SceneManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -31,6 +34,10 @@ public class NavigationBaMsgrController {
     @FXML
     public void initialize() {
         setupWindowDrag();
+        if (transparentBtn != null) {
+            transparentBtn.setOnMouseClicked(event -> navigateBack());
+            transparentBtn.setStyle("-fx-cursor: hand;");
+        }
     }
 
     private void setupWindowDrag() {
@@ -55,8 +62,18 @@ public class NavigationBaMsgrController {
 
     @FXML
     private void closeIconBtnClicked(MouseEvent event) {
-        Platform.exit();
-        System.exit(0);
+        navigateBack();
+    }
+
+    private void navigateBack() {
+        User user = ServiceFactory.getInstance().getAuthService().getCurrentUser();
+        if (user != null && user.getRole() == Role.ADMIN) {
+            SceneManager.switchScene("adminServicePage.fxml");
+        } else if (user != null && user.getRole() == Role.DRIVER) {
+            SceneManager.switchScene("driverServicePage.fxml");
+        } else {
+            SceneManager.switchScene("customerServicePage.fxml");
+        }
     }
 
     @FXML
