@@ -14,6 +14,8 @@ import javafx.scene.web.WebView;
  */
 public class DriverMainPageController extends Controller {
 
+    public static DriverMainPageController driverMainPageInstance;
+
     @FXML
     public Pane mainPane;
 
@@ -88,6 +90,7 @@ public class DriverMainPageController extends Controller {
 
     @FXML
     public void initialize() {
+        driverMainPageInstance = this;
         populateActiveTrip();
     }
 

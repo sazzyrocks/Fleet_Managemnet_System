@@ -94,7 +94,7 @@ public class InvoiceController extends Controller {
                 ivPaymentDate.setText(selectedOrder.getCreatedAt().format(dtf));
             }
 
-            BigDecimal total = selectedOrder.getTotalAmount() != null ? selectedOrder.getTotalAmount() : new BigDecimal("250.00");
+            BigDecimal total = selectedOrder.getTotalPrice() != null ? selectedOrder.getTotalPrice() : new BigDecimal("250.00");
             BigDecimal subtotal = total.divide(new BigDecimal("1.06"), 2, RoundingMode.HALF_UP);
             BigDecimal tax = total.subtract(subtotal);
 

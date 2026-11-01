@@ -136,7 +136,7 @@ public class EditVehiclePageController extends Controller {
     private void loadVehicleData(Vehicle v) {
         if (txtVehicleName != null) txtVehicleName.setText(v.getModel());
         if (txtPlateNumber != null) txtPlateNumber.setText(v.getLicensePlate());
-        if (txtChassisNumber != null) txtChassisNumber.setText(v.getVin() != null ? v.getVin() : "");
+        if (txtChassisNumber != null) txtChassisNumber.setText(v.getLicensePlate() != null ? v.getLicensePlate() : "");
         if (txtPrice != null && v.getDailyRate() != null) txtPrice.setText(v.getDailyRate().toPlainString());
         if (txtManufacturing != null && v.getYear() != null) txtManufacturing.setText(String.valueOf(v.getYear()));
 
@@ -287,7 +287,7 @@ public class EditVehiclePageController extends Controller {
         v.setFuelType(FuelType.PETROL);
         v.setTransmission(TransmissionType.AUTOMATIC);
         v.setStatus(VehicleStatus.AVAILABLE);
-        v.setImageUrl(selectedImagePath);
+        v.setImagePath(selectedImagePath);
 
         try {
             if (txtManufacturing != null && !txtManufacturing.getText().isBlank()) {

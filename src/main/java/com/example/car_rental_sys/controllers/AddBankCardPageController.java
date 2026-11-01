@@ -144,10 +144,12 @@ public class AddBankCardPageController extends Controller {
         card.setUserId(user.getUserId());
         card.setCardHolder(holder);
         card.setCardNumber(cardNum);
-        card.setBankName(bank);
         card.setCardType(visaRadio != null && visaRadio.isSelected() ? "Visa" : "Mastercard");
-        card.setExpiryMonth(txtValidMonth != null && !txtValidMonth.getText().isBlank() ? Integer.parseInt(txtValidMonth.getText().trim()) : 12);
-        card.setExpiryYear(txtValidDate != null && !txtValidDate.getText().isBlank() ? Integer.parseInt(txtValidDate.getText().trim()) : 2028);
+        String month = txtValidMonth != null && !txtValidMonth.getText().isBlank() ? txtValidMonth.getText().trim() : "12";
+        String year = txtValidDate != null && !txtValidDate.getText().isBlank() ? txtValidDate.getText().trim() : "28";
+        card.setExpiryDate(month + "/" + year);
+        card.setCvv("123");
+        card.setBalance(new java.math.BigDecimal("1000.00"));
 
         addCardButton.setDisable(true);
         addCardButton.setText("Adding...");

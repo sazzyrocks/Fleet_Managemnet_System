@@ -109,7 +109,7 @@ public class CarDetailsPageController extends Controller {
                 commentsNum.setText("12 Reviews");
             }
 
-            loadVehicleImage(carImageView, selectedVehicle.getImageUrl());
+            loadVehicleImage(carImageView, selectedVehicle.getImagePath());
         }
     }
 

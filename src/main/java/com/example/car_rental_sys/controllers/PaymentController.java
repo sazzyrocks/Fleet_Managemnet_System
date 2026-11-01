@@ -200,7 +200,7 @@ public class PaymentController extends Controller {
                 payment.setOrderId(order.getOrderId());
                 payment.setAmount(calculatedTotal != null ? calculatedTotal : new BigDecimal("280.00"));
                 payment.setPaymentMethod(radioBtn1 != null && radioBtn1.isSelected() ? "PayPal" : "CreditCard");
-                payment.setStatus(PaymentStatus.COMPLETED);
+                payment.setPaymentStatus(PaymentStatus.SUCCESS);
 
                 paymentService.processPayment(payment);
 

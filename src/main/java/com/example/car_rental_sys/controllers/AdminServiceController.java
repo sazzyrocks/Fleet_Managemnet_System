@@ -19,6 +19,8 @@ public class AdminServiceController extends Controller {
 
     private static final Logger LOGGER = Logger.getLogger(AdminServiceController.class.getName());
 
+    public static AdminServiceController instance;
+
     @FXML
     public AnchorPane mainPane;
 
@@ -48,6 +50,7 @@ public class AdminServiceController extends Controller {
 
     @FXML
     public void initialize() {
+        instance = this;
         if (dashboardContainer != null) {
             dashboardContainer.setVisible(true);
         }

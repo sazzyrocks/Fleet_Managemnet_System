@@ -95,7 +95,7 @@ public class CustomerSideBarController extends Controller {
             AsyncExecutor.getInstance().execute(() -> {
                 try {
                     OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
-                    List<Order> userOrders = orderDAO.findByUserId(currentUser.getUserId());
+                    List<Order> userOrders = orderDAO.findByCustomerId(currentUser.getUserId());
                     int count = userOrders.size();
 
                     Platform.runLater(() -> {

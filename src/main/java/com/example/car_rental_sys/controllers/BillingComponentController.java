@@ -92,7 +92,7 @@ public class BillingComponentController extends Controller {
         List<Payment> displayList = allPayments;
         if (filterStatus != null) {
             displayList = allPayments.stream()
-                    .filter(p -> p.getStatus() == filterStatus)
+                    .filter(p -> p.getPaymentStatus() == filterStatus)
                     .collect(Collectors.toList());
         }
 
@@ -118,7 +118,7 @@ public class BillingComponentController extends Controller {
             methodLbl.setPrefWidth(90);
             methodLbl.setStyle("-fx-text-fill: #dfdfdf; -fx-font-size: 11px;");
 
-            String dateStr = p.getPaymentDate() != null ? p.getPaymentDate().format(df) : "Recent";
+            String dateStr = p.getPaidAt() != null ? p.getPaidAt().format(df) : "Recent";
             Label dateLbl = new Label(dateStr);
             dateLbl.setPrefWidth(95);
             dateLbl.setStyle("-fx-text-fill: #86909c; -fx-font-size: 11px;");
@@ -127,7 +127,7 @@ public class BillingComponentController extends Controller {
             amountLbl.setPrefWidth(75);
             amountLbl.setStyle("-fx-text-fill: #00b42a; -fx-font-weight: bold; -fx-font-size: 11px;");
 
-            Label statusLbl = new Label(p.getStatus() != null ? p.getStatus().name() : "PAID");
+            Label statusLbl = new Label(p.getPaymentStatus() != null ? p.getPaymentStatus().name() : "SUCCESS");
             HBox.setHgrow(statusLbl, Priority.ALWAYS);
             statusLbl.setStyle("-fx-text-fill: #dfdfdf; -fx-font-size: 11px;");
 
@@ -143,7 +143,7 @@ public class BillingComponentController extends Controller {
 
     @FXML
     private void billCompleteBtnClicked(MouseEvent event) {
-        filterAndRender(PaymentStatus.COMPLETED);
+        filterAndRender(PaymentStatus.SUCCESS);
     }
 
     @FXML

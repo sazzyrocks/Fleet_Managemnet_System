@@ -2,7 +2,7 @@ package com.example.car_rental_sys.controllers;
 
 import com.example.car_rental_sys.concurrency.AsyncExecutor;
 import com.example.car_rental_sys.dao.DAOFactory;
-import com.example.car_rental_sys.model.VehicleDiagnostics;
+import com.example.car_rental_sys.model.VehicleDiagnostic;
 import com.example.car_rental_sys.util.SceneManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -50,7 +50,7 @@ public class DiagnosticDataController extends Controller {
     private void loadDiagnostics() {
         AsyncExecutor.getInstance().execute(() -> {
             try {
-                List<VehicleDiagnostics> list = DAOFactory.getInstance().getVehicleDiagnosticsDAO().findAll();
+                List<VehicleDiagnostic> list = DAOFactory.getInstance().getVehicleDiagnosticDAO().findAll();
                 Platform.runLater(() -> renderDiagnostics(list));
             } catch (Exception ignored) {
                 Platform.runLater(() -> renderFallbackDiagnostics());
@@ -58,14 +58,14 @@ public class DiagnosticDataController extends Controller {
         });
     }
 
-    private void renderDiagnostics(List<VehicleDiagnostics> list) {
+    private void renderDiagnostics(List<VehicleDiagnostic> list) {
         logContainer.getChildren().clear();
         if (list.isEmpty()) {
             renderFallbackDiagnostics();
             return;
         }
 
-        for (VehicleDiagnostics d : list) {
+        for (VehicleDiagnostic d : list) {
             VBox card = new VBox(6);
             card.setPadding(new Insets(10));
             card.setStyle("-fx-background-color: #f7f8fa; -fx-background-radius: 8px; -fx-border-color: #e5e6eb;");
