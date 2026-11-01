@@ -238,9 +238,9 @@ INSERT INTO `vehicle_categories` (`category_id`, `name`, `description`) VALUES
 (4, 'Electric', 'Eco-friendly modern electric vehicles with high efficiency');
 
 -- Insert default Admin user (Password is 'admin123' hashed with jBCrypt)
--- Hash generated via BCrypt: $2a$10$wT33mKj21k26r5h3d5YpweaVvR9g4PmsO2xJ1qWl7OaH.fW0gG2K.
+-- Hash generated via BCrypt for 'admin123'
 INSERT INTO `users` (`user_id`, `username`, `password_hash`, `email`, `phone`, `full_name`, `role`, `status`) VALUES
-(1, 'admin', '$2a$10$wT33mKj21k26r5h3d5YpweaVvR9g4PmsO2xJ1qWl7OaH.fW0gG2K.', 'admin@fleetms.com', '+1-555-0100', 'System Administrator', 'ADMIN', 'ACTIVE');
+(1, 'admin', '$2a$10$4ruqE8FlnERNCuIW/6pI6.1rlZmJiG/plwFwif5KPGxjwbM9Sm6je', 'admin@fleetms.com', '+1-555-0100', 'System Administrator', 'ADMIN', 'ACTIVE');
 
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS = 1;

@@ -99,12 +99,29 @@ public final class DatabaseInitializer {
                         sqlBuilder.setLength(0);
                     }
                 }
+                ensureAdminUser(conn);
                 LOGGER.info("Database schema initialized successfully.");
                 return true;
             }
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Automated database initialization encountered an error: " + e.getMessage(), e);
             return false;
+        }
+    }
+
+    private static void ensureAdminUser(Connection conn) {
+        String adminPass = "admin123";
+        String adminHash = com.example.car_rental_sys.util.PasswordUtil.hashPassword(adminPass);
+        String sql = "INSERT INTO `users` (`user_id`, `username`, `password_hash`, `email`, `phone`, `full_name`, `role`, `status`) " +
+                     "VALUES (1, 'admin', ?, 'admin@fleetms.com', '+1-555-0100', 'System Administrator', 'ADMIN', 'ACTIVE') " +
+                     "ON DUPLICATE KEY UPDATE `password_hash` = ?, `status` = 'ACTIVE'";
+        try (java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, adminHash);
+            pstmt.setString(2, adminHash);
+            pstmt.executeUpdate();
+            LOGGER.info("Verified default admin credentials (admin / admin123).");
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, "Note verifying admin account: {0}", e.getMessage());
         }
     }
 }
