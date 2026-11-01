@@ -24,6 +24,42 @@ public final class DatabaseInitializer {
         // Prevent instantiation of utility class
     }
 
+    private static void ensureDatabaseExists() {
+        try {
+            DatabaseConnection dbConn = DatabaseConnection.getInstance();
+            String fullUrl = dbConn.getUrl();
+            String username = dbConn.getUsername();
+            String password = dbConn.getPassword();
+
+            if (fullUrl == null || username == null) {
+                return;
+            }
+
+            // Extract server URL without DB name
+            String serverUrl = fullUrl;
+            String dbName = "fleet_management_db";
+            int slashIndex = fullUrl.indexOf('/', "jdbc:mysql://".length());
+            if (slashIndex != -1) {
+                int questionIndex = fullUrl.indexOf('?', slashIndex);
+                if (questionIndex != -1) {
+                    dbName = fullUrl.substring(slashIndex + 1, questionIndex);
+                    serverUrl = fullUrl.substring(0, slashIndex + 1) + fullUrl.substring(questionIndex);
+                } else {
+                    dbName = fullUrl.substring(slashIndex + 1);
+                    serverUrl = fullUrl.substring(0, slashIndex + 1);
+                }
+            }
+
+            try (Connection conn = java.sql.DriverManager.getConnection(serverUrl, username, password);
+                 Statement stmt = conn.createStatement()) {
+                stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS `" + dbName + "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                LOGGER.info("Ensured database '" + dbName + "' exists on MySQL server.");
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, "Note during database pre-creation: {0}", e.getMessage());
+        }
+    }
+
     /**
      * Executes schema.sql against the configured database to ensure all required tables exist.
      *
@@ -31,6 +67,7 @@ public final class DatabaseInitializer {
      */
     public static boolean initializeDatabase() {
         LOGGER.info("Starting automated database schema verification...");
+        ensureDatabaseExists();
         try (InputStream in = DatabaseInitializer.class.getClassLoader().getResourceAsStream(SCHEMA_FILE)) {
             if (in == null) {
                 LOGGER.log(Level.WARNING, "Schema file {0} not found on classpath. Skipping automatic initialization.", SCHEMA_FILE);
