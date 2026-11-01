@@ -6,11 +6,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<Pane fx:id="panelSetting" prefHeight="700.0" prefWidth="820.0" style="-fx-background-color: transparent;"
+<Pane fx:id="panelSetting" prefHeight="700.0" prefWidth="820.0" style="-fx-background-color: white;"
       stylesheets="@../style/settingComponentLight.css" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.car_rental_sys.controllers.PersonalPageController">
    <ImageView fx:id="ivAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="299.0" layoutY="35.0" pickOnBounds="true"
               preserveRatio="true"/>
+   <Button fx:id="backBtn" layoutX="670.0" layoutY="35.0" mnemonicParsing="false"
+           onMouseClicked="#backToDashboardClicked" prefHeight="35.0" prefWidth="120.0"
+           style="-fx-background-color: #165DFF; -fx-background-radius: 6px; -fx-cursor: hand;"
+           text="← Dashboard" textFill="WHITE">
+      <font>
+         <Font name="Arial Bold" size="13.0"/>
+      </font>
+   </Button>
    <Button fx:id="ivDeleteBtn" layoutX="393.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#deleteClicked"
            prefHeight="35.0" prefWidth="90.0"
            style="-fx-background-color: white; -fx-background-insets: 0; -fx-border-insets: 0; -fx-border-radius: 4px; -fx-border-color: #e5e6eb;"

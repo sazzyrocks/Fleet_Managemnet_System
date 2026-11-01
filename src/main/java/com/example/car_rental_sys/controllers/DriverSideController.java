@@ -116,7 +116,13 @@ public class DriverSideController extends Controller {
 
     private void attachNavigationHandlers() {
         if (item1 != null) {
-            item1.setOnMouseClicked(event -> SceneManager.switchScene("PersonalInfoPage.fxml"));
+            item1.setOnMouseClicked(event -> {
+                if (DriverMainPageController.driverMainPageInstance != null) {
+                    DriverMainPageController.driverMainPageInstance.showProfilePage();
+                } else {
+                    SceneManager.switchScene("PersonalInfoPage.fxml");
+                }
+            });
         }
         if (item2 != null) {
             item2.setOnMouseClicked(event -> SceneManager.switchScene("messagePage.fxml"));
@@ -125,7 +131,13 @@ public class DriverSideController extends Controller {
             item3.setOnMouseClicked(event -> SceneManager.switchScene("drivingModePage.fxml"));
         }
         if (item4 != null) {
-            item4.setOnMouseClicked(event -> SceneManager.switchScene("SettingPage.fxml"));
+            item4.setOnMouseClicked(event -> {
+                if (DriverMainPageController.driverMainPageInstance != null) {
+                    DriverMainPageController.driverMainPageInstance.showSettingPage();
+                } else {
+                    SceneManager.switchScene("SettingPage.fxml");
+                }
+            });
         }
         if (item5 != null) {
             item5.setOnMouseClicked(event -> handleLogout());
