@@ -11,6 +11,14 @@
          <Font name="System Bold" size="24.0" />
       </font>
    </Label>
+   <Button fx:id="btnBackToDashboard" layoutX="380.0" layoutY="40.0" mnemonicParsing="false"
+           onMouseClicked="#backToDashboardClicked" prefHeight="32.0" prefWidth="120.0"
+           style="-fx-background-color: #165DFF; -fx-background-radius: 6px; -fx-cursor: hand;"
+           text="← Dashboard" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="13.0"/>
+      </font>
+   </Button>
    <Label id="lblTotalOrder" fx:id="numOrder" layoutX="40.0" layoutY="78.0" text="4 orders" textFill="#86909c">
       <font>
          <Font name="System Bold" size="12.0" />

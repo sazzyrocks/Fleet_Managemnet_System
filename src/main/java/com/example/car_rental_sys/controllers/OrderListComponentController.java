@@ -68,6 +68,18 @@ public class OrderListComponentController extends Controller {
         loadOrders();
     }
 
+    @FXML
+    private void backToDashboardClicked(MouseEvent event) {
+        User user = ServiceFactory.getInstance().getAuthService().getCurrentUser();
+        if (user != null && user.getRole() == com.example.car_rental_sys.model.Role.ADMIN) {
+            SceneManager.switchScene("adminServicePage.fxml");
+        } else if (user != null && user.getRole() == com.example.car_rental_sys.model.Role.DRIVER) {
+            SceneManager.switchScene("driverServicePage.fxml");
+        } else {
+            SceneManager.switchScene("customerServicePage.fxml");
+        }
+    }
+
     private void setupTable() {
         if (tableContainer != null) {
             orderRowsBox = new VBox(8);

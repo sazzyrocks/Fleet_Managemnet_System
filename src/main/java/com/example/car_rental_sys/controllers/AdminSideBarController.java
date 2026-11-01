@@ -87,7 +87,13 @@ public class AdminSideBarController extends Controller {
 
     private void attachNavigationHandlers() {
         if (item1 != null) {
-            item1.setOnMouseClicked(event -> SceneManager.switchScene("PersonalInfoPage.fxml"));
+            item1.setOnMouseClicked(event -> {
+                if (AdminServiceController.instance != null) {
+                    AdminServiceController.instance.showProfilePage();
+                } else {
+                    SceneManager.switchScene("adminServicePage.fxml");
+                }
+            });
         }
         if (item2 != null) {
             item2.setOnMouseClicked(event -> SceneManager.switchScene("messagePage.fxml"));
@@ -102,7 +108,13 @@ public class AdminSideBarController extends Controller {
             item5.setOnMouseClicked(event -> SceneManager.switchScene("showOrderComponent.fxml"));
         }
         if (item6 != null) {
-            item6.setOnMouseClicked(event -> SceneManager.switchScene("SettingPage.fxml"));
+            item6.setOnMouseClicked(event -> {
+                if (AdminServiceController.instance != null) {
+                    AdminServiceController.instance.showSettingPage();
+                } else {
+                    SceneManager.switchScene("adminServicePage.fxml");
+                }
+            });
         }
         if (item7 != null) {
             item7.setOnMouseClicked(event -> handleLogout());

@@ -76,6 +76,9 @@ public final class SceneManager {
                 scene.setRoot(root);
             }
 
+            // Enable global window dragging on any empty/background space
+            makeDraggable(root);
+
             // Adjust stage size if loading smaller dialogs (e.g. loadingPage.fxml)
             if ("loadingPage.fxml".equalsIgnoreCase(fxmlFileName)) {
                 primaryStage.setWidth(640.0);
@@ -97,14 +100,36 @@ public final class SceneManager {
         }
     }
 
+    private static double xOffset = 0;
+    private static double yOffset = 0;
+
     /**
-     * Centers the primary stage on screen.
+     * Enables clicking and dragging the window from any root background area.
+     */
+    private static void makeDraggable(Parent root) {
+        if (root == null) return;
+        root.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+            if (primaryStage != null && !primaryStage.isMaximized()) {
+                primaryStage.setX(event.getScreenX() - xOffset);
+                primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
+    }
+
+    /**
+     * Centers the primary stage on screen, ensuring it is never pushed off the top edge.
      */
     public static void centerStage() {
         if (primaryStage != null) {
             Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-            primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth()) / 2);
-            primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight()) / 2);
+            double x = screenBounds.getMinX() + Math.max(0.0, (screenBounds.getWidth() - primaryStage.getWidth()) / 2);
+            double y = screenBounds.getMinY() + Math.max(30.0, (screenBounds.getHeight() - primaryStage.getHeight()) / 2);
+            primaryStage.setX(x);
+            primaryStage.setY(y);
         }
     }
 
