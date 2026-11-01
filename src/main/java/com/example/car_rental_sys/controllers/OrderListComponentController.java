@@ -51,6 +51,9 @@ public class OrderListComponentController extends Controller {
     private Button btnCancel;
 
     @FXML
+    private Button btnRentCar;
+
+    @FXML
     private Pane tableContainer;
 
     @FXML
@@ -78,6 +81,11 @@ public class OrderListComponentController extends Controller {
         } else {
             SceneManager.switchScene("customerServicePage.fxml");
         }
+    }
+
+    @FXML
+    private void rentCarClicked(MouseEvent event) {
+        SceneManager.switchScene("carsListPage.fxml");
     }
 
     private void setupTable() {
