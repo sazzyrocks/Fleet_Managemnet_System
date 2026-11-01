@@ -97,7 +97,7 @@ public class DriverSideController extends Controller {
                                 rating.setText(String.format("%.1f", d.getRating() != null ? d.getRating().doubleValue() : 5.0));
                             }
                             if (exp != null) {
-                                exp.setText(String.valueOf(d.getYearsExperience() != null ? d.getYearsExperience() : 3));
+                                exp.setText(String.valueOf(d.getExperienceYears() != null ? d.getExperienceYears() : 3));
                             }
                             if (speed != null) {
                                 speed.setText("Active");

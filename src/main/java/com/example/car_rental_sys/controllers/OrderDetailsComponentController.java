@@ -115,9 +115,9 @@ public class OrderDetailsComponentController extends Controller {
             lblLocation.setText(selectedOrder.getPickupLocation() != null ? selectedOrder.getPickupLocation() : "Central Airport Hub");
         }
 
-        if (totalAmount != null && selectedOrder.getTotalAmount() != null) {
-            totalAmount.setText("$" + selectedOrder.getTotalAmount().toPlainString());
-            if (carPrice != null) carPrice.setText("$" + selectedOrder.getTotalAmount().toPlainString());
+        if (totalAmount != null && selectedOrder.getTotalPrice() != null) {
+            totalAmount.setText("$" + selectedOrder.getTotalPrice().toPlainString());
+            if (carPrice != null) carPrice.setText("$" + selectedOrder.getTotalPrice().toPlainString());
         }
 
         if (orderTime != null && selectedOrder.getCreatedAt() != null) {
@@ -144,7 +144,7 @@ public class OrderDetailsComponentController extends Controller {
                     if (vOpt.isPresent()) {
                         Vehicle v = vOpt.get();
                         if (carName != null) carName.setText(v.getBrand() + " " + v.getModel());
-                        loadCarImage(carImg, v.getImageUrl());
+                        loadCarImage(carImg, v.getImagePath());
                     } else {
                         if (carName != null) carName.setText("Fleet Vehicle #" + selectedOrder.getVehicleId());
                     }

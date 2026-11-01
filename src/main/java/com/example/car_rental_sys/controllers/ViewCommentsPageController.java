@@ -105,7 +105,7 @@ public class ViewCommentsPageController {
         }
 
         int vehicleId = currentVehicle.getVehicleId();
-        AsyncExecutor.getInstance().execute(
+        AsyncExecutor.getInstance().executeAsync(
                 () -> reviewDAO.findByVehicleId(vehicleId),
                 reviews -> {
                     if (vBoxContainer != null) {
@@ -152,7 +152,7 @@ public class ViewCommentsPageController {
 
         textArea.clear();
 
-        AsyncExecutor.getInstance().execute(
+        AsyncExecutor.getInstance().executeAsync(
                 () -> reviewDAO.save(review),
                 saved -> {
                     addCommentCard(review.getUserName(), review.getCommentText(), review.getCreatedAt(), review.getRating());

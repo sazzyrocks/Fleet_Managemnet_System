@@ -112,6 +112,24 @@ public class RentalService {
         return orderDAO.findByOrderNumber(orderNumber);
     }
 
+    public Order createReservation(Integer customerId, Integer vehicleId,
+                                   LocalDateTime startDate, LocalDateTime endDate,
+                                   String pickupLocation, String returnLocation) {
+        int custId = customerId != null ? customerId : 1;
+        int vehId = vehicleId != null ? vehicleId : 1;
+        return bookRental(custId, vehId, null, startDate, endDate, pickupLocation, returnLocation);
+    }
+
+    public boolean confirmBooking(Integer orderId) {
+        if (orderId == null) return false;
+        return updateOrderStatus(orderId, OrderStatus.CONFIRMED);
+    }
+
+    public boolean completeBooking(Integer orderId) {
+        if (orderId == null) return false;
+        return updateOrderStatus(orderId, OrderStatus.COMPLETED);
+    }
+
     public boolean updateOrderStatus(int orderId, OrderStatus status) {
         return orderDAO.updateStatus(orderId, status);
     }

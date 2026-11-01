@@ -33,6 +33,27 @@ public class PaymentService {
         this.orderDAO = orderDAO;
     }
 
+    public Payment processPayment(Payment payment) {
+        if (payment == null) {
+            throw new ServiceException("Payment details cannot be null.");
+        }
+        if (payment.getOrderId() == null) {
+            throw new ServiceException("Payment order ID must not be null.");
+        }
+        payment.setPaymentStatus(PaymentStatus.SUCCESS);
+        if (payment.getTransactionReference() == null) {
+            payment.setTransactionReference("TXN-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+        }
+        return paymentDAO.save(payment);
+    }
+
+    public BigDecimal getTotalRevenue() {
+        return paymentDAO.findAll().stream()
+                .filter(p -> PaymentStatus.SUCCESS.equals(p.getPaymentStatus()))
+                .map(Payment::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
     /**
      * Processes payment for a rental order with ACID transactional atomicity.
      *

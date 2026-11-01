@@ -90,7 +90,7 @@ public class showCardDetailsController extends Controller {
         if (activeCard == null) return;
 
         if (cardName != null) cardName.setText(activeCard.getCardType() != null ? activeCard.getCardType() : "Primary Card");
-        if (cardBankName != null) cardBankName.setText(activeCard.getBankName() != null ? activeCard.getBankName() : "Fleet Partner Bank");
+        if (cardBankName != null) cardBankName.setText(activeCard.getCardType() != null ? activeCard.getCardType() + " Bank" : "Fleet Partner Bank");
         if (cardHolderName != null) cardHolderName.setText(activeCard.getCardHolder() != null ? activeCard.getCardHolder() : "Cardholder");
 
         if (cardNumber != null && activeCard.getCardNumber() != null) {
@@ -100,8 +100,7 @@ public class showCardDetailsController extends Controller {
         }
 
         if (cardValidDate != null) {
-            cardValidDate.setText(String.format("%02d/%d", activeCard.getExpiryMonth() != null ? activeCard.getExpiryMonth() : 12,
-                    activeCard.getExpiryYear() != null ? activeCard.getExpiryYear() % 100 : 28));
+            cardValidDate.setText(activeCard.getExpiryDate() != null ? activeCard.getExpiryDate() : "12/28");
         }
     }
 

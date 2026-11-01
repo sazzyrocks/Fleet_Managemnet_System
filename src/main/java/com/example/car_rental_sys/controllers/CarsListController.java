@@ -120,7 +120,7 @@ public class CarsListController extends Controller {
         imageView.setFitHeight(160);
         imageView.setFitWidth(310);
         imageView.setPreserveRatio(true);
-        loadVehicleImage(imageView, vehicle.getImageUrl());
+        loadVehicleImage(imageView, vehicle.getImagePath());
 
         // Spec highlights
         HBox specs = new HBox(15);

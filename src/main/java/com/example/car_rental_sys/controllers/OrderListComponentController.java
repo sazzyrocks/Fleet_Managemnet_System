@@ -91,7 +91,7 @@ public class OrderListComponentController extends Controller {
                 if (user != null && user.isAdmin()) {
                     orders = orderDAO.findAll();
                 } else if (user != null) {
-                    orders = orderDAO.findByUserId(user.getUserId());
+                    orders = orderDAO.findByCustomerId(user.getUserId());
                 } else {
                     orders = orderDAO.findAll();
                 }
@@ -144,7 +144,7 @@ public class OrderListComponentController extends Controller {
             dateLbl.setPrefWidth(85);
             dateLbl.setStyle("-fx-text-fill: #86909c; -fx-font-size: 11px;");
 
-            Label priceLbl = new Label("$" + (order.getTotalAmount() != null ? order.getTotalAmount().toPlainString() : "0.00"));
+            Label priceLbl = new Label("$" + (order.getTotalPrice() != null ? order.getTotalPrice().toPlainString() : "0.00"));
             priceLbl.setPrefWidth(80);
             priceLbl.setStyle("-fx-text-fill: #1d2129; -fx-font-weight: bold; -fx-font-size: 12px;");
 

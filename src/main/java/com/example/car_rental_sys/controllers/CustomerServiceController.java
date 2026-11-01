@@ -18,6 +18,8 @@ public class CustomerServiceController extends Controller {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerServiceController.class.getName());
 
+    public static CustomerServiceController instance;
+
     @FXML
     public AnchorPane mainPane;
 
@@ -38,6 +40,7 @@ public class CustomerServiceController extends Controller {
 
     @FXML
     public void initialize() {
+        instance = this;
         if (hugeContainer != null) {
             hugeContainer.setVisible(false);
         }

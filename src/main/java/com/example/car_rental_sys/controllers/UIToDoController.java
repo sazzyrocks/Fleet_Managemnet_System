@@ -72,7 +72,7 @@ public class UIToDoController {
         User user = ServiceFactory.getInstance().getAuthService().getCurrentUser();
         int userId = user != null ? user.getUserId() : 1;
 
-        AsyncExecutor.getInstance().execute(
+        AsyncExecutor.getInstance().executeAsync(
                 () -> todoDAO.findPendingByUserId(userId),
                 todos -> {
                     displayTodos(todos);
@@ -132,7 +132,7 @@ public class UIToDoController {
         }
 
         int id = currentTodoId1;
-        AsyncExecutor.getInstance().execute(
+        AsyncExecutor.getInstance().executeAsync(
                 () -> todoDAO.markAsCompleted(id, true),
                 success -> refreshAfterDelay(),
                 error -> System.err.println("[UIToDoController] Failed to complete todo: " + error.getMessage())
@@ -151,7 +151,7 @@ public class UIToDoController {
         }
 
         int id = currentTodoId2;
-        AsyncExecutor.getInstance().execute(
+        AsyncExecutor.getInstance().executeAsync(
                 () -> todoDAO.markAsCompleted(id, true),
                 success -> refreshAfterDelay(),
                 error -> System.err.println("[UIToDoController] Failed to complete todo: " + error.getMessage())
@@ -202,7 +202,7 @@ public class UIToDoController {
 
         Todo todo = new Todo(userId, content, content, TodoPriority.MEDIUM, due);
 
-        AsyncExecutor.getInstance().execute(
+        AsyncExecutor.getInstance().executeAsync(
                 () -> todoDAO.save(todo),
                 saved -> {
                     taskContent.clear();
