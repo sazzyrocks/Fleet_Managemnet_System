@@ -93,7 +93,7 @@ public class AdminSideBarController extends Controller {
             item2.setOnMouseClicked(event -> SceneManager.switchScene("messagePage.fxml"));
         }
         if (item3 != null) {
-            item3.setOnMouseClicked(event -> SceneManager.switchScene("dashboard.fxml"));
+            item3.setOnMouseClicked(event -> SceneManager.switchScene("adminServicePage.fxml"));
         }
         if (item4 != null) {
             item4.setOnMouseClicked(event -> SceneManager.switchScene("AdminVehiclePage.fxml"));

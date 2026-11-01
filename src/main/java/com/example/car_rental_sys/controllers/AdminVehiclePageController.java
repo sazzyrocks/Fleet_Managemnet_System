@@ -46,6 +46,11 @@ public class AdminVehiclePageController extends Controller {
     }
 
     @FXML
+    private void backToDashboardClicked(MouseEvent event) {
+        com.example.car_rental_sys.util.SceneManager.switchScene("adminServicePage.fxml");
+    }
+
+    @FXML
     private void addVehiclePageClicked(MouseEvent event) {
         highlightButton(addVehicleBtn);
         EditVehiclePageController.setEditMode(false, null);
