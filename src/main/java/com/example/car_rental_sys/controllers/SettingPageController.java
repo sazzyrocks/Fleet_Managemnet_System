@@ -1,6 +1,12 @@
 package com.example.car_rental_sys.controllers;
 
+import com.example.car_rental_sys.model.Role;
+import com.example.car_rental_sys.model.User;
+import com.example.car_rental_sys.service.ServiceFactory;
+import com.example.car_rental_sys.util.SceneManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -10,6 +16,9 @@ public class SettingPageController extends Controller {
 
     @FXML
     private Pane settingPane;
+
+    @FXML
+    private Button backBtn;
 
     @FXML
     private Pane switchPaneOne;
@@ -29,6 +38,26 @@ public class SettingPageController extends Controller {
         setupSwitch(switchPaneOne, stateOne, () -> stateOne = !stateOne);
         setupSwitch(switchPaneTwo, stateTwo, () -> stateTwo = !stateTwo);
         setupSwitch(switchPaneThree, stateThree, () -> stateThree = !stateThree);
+    }
+
+    @FXML
+    private void backToDashboardClicked(MouseEvent event) {
+        User currentUser = ServiceFactory.getInstance().getAuthService().getCurrentUser();
+        if (currentUser != null && currentUser.getRole() != null) {
+            switch (currentUser.getRole()) {
+                case ADMIN:
+                    SceneManager.switchScene("adminServicePage.fxml");
+                    return;
+                case DRIVER:
+                    SceneManager.switchScene("driverServicePage.fxml");
+                    return;
+                case CUSTOMER:
+                default:
+                    SceneManager.switchScene("customerServicePage.fxml");
+                    return;
+            }
+        }
+        SceneManager.switchScene("customerServicePage.fxml");
     }
 
     private void setupSwitch(Pane switchPane, boolean initialActive, Runnable onToggle) {

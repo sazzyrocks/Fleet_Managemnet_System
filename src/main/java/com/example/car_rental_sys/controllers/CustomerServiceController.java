@@ -60,6 +60,26 @@ public class CustomerServiceController extends Controller {
         }
     }
 
+    public void showSettingPage() {
+        showSettingsPanel("SettingPage.fxml");
+        loadSubComponent(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showAccSecurity() {
+        showSettingsPanel("AccountSecurityPage.fxml");
+        loadSubComponent(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showPasswordPage() {
+        showSettingsPanel("PasswordPage.fxml");
+        loadSubComponent(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showProfilePage() {
+        showSettingsPanel("PersonalInfoPage.fxml");
+        loadSubComponent(middlePanel, "InfoMiddleBar.fxml");
+    }
+
     private void loadSubComponent(Pane container, String fxmlName) {
         if (container == null) return;
         try {

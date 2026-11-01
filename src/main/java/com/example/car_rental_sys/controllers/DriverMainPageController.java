@@ -91,7 +91,54 @@ public class DriverMainPageController extends Controller {
     @FXML
     public void initialize() {
         driverMainPageInstance = this;
+        if (optionPane != null) {
+            optionPane.setVisible(false);
+        }
         populateActiveTrip();
+    }
+
+    public void showSettingsView(String fxmlName) {
+        if (workplacePane != null) workplacePane.setVisible(false);
+        if (optionPane != null) {
+            optionPane.setVisible(true);
+            if (settingMainPanel != null) {
+                loadSubView(settingMainPanel, fxmlName);
+            }
+        }
+    }
+
+    public void showSettingPage() {
+        showSettingsView("SettingPage.fxml");
+        loadSubView(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showAccSecurity() {
+        showSettingsView("AccountSecurityPage.fxml");
+        loadSubView(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showPasswordPage() {
+        showSettingsView("PasswordPage.fxml");
+        loadSubView(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showProfilePage() {
+        showSettingsView("PersonalInfoPage.fxml");
+        loadSubView(middlePanel, "InfoMiddleBar.fxml");
+    }
+
+    private void loadSubView(Pane targetPane, String fxmlName) {
+        if (targetPane == null) return;
+        try {
+            java.net.URL resource = getClass().getResource("/com/example/car_rental_sys/fxml/" + fxmlName);
+            if (resource != null) {
+                javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(resource);
+                targetPane.getChildren().setAll(root);
+            }
+        } catch (Exception e) {
+            java.util.logging.Logger.getLogger(DriverMainPageController.class.getName())
+                    .log(java.util.logging.Level.SEVERE, "Failed to load sub-view: " + fxmlName, e);
+        }
     }
 
     private void populateActiveTrip() {

@@ -15,8 +15,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ------------------------------------------------------------------------------
 -- 1. Table: users
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+-- DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
     `user_id`       INT AUTO_INCREMENT PRIMARY KEY,
     `username`      VARCHAR(50)  NOT NULL UNIQUE,
     `password_hash` VARCHAR(255) NOT NULL COMMENT 'BCrypt salted hash (60 chars)',
@@ -35,8 +35,8 @@ CREATE TABLE `users` (
 -- ------------------------------------------------------------------------------
 -- 2. Table: bank_cards
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `bank_cards`;
-CREATE TABLE `bank_cards` (
+-- DROP TABLE IF EXISTS `bank_cards`;
+CREATE TABLE IF NOT EXISTS `bank_cards` (
     `card_id`      INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`      INT NOT NULL,
     `card_number`  VARCHAR(30)  NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE `bank_cards` (
 -- ------------------------------------------------------------------------------
 -- 3. Table: drivers
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `drivers`;
-CREATE TABLE `drivers` (
+-- DROP TABLE IF EXISTS `drivers`;
+CREATE TABLE IF NOT EXISTS `drivers` (
     `driver_id`        INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`          INT NOT NULL UNIQUE,
     `license_number`   VARCHAR(50) NOT NULL UNIQUE,
@@ -70,8 +70,8 @@ CREATE TABLE `drivers` (
 -- ------------------------------------------------------------------------------
 -- 4. Table: vehicle_categories
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `vehicle_categories`;
-CREATE TABLE `vehicle_categories` (
+-- DROP TABLE IF EXISTS `vehicle_categories`;
+CREATE TABLE IF NOT EXISTS `vehicle_categories` (
     `category_id` INT AUTO_INCREMENT PRIMARY KEY,
     `name`        VARCHAR(50) NOT NULL UNIQUE,
     `description` VARCHAR(255) NULL
@@ -80,8 +80,8 @@ CREATE TABLE `vehicle_categories` (
 -- ------------------------------------------------------------------------------
 -- 5. Table: vehicles
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `vehicles`;
-CREATE TABLE `vehicles` (
+-- DROP TABLE IF EXISTS `vehicles`;
+CREATE TABLE IF NOT EXISTS `vehicles` (
     `vehicle_id`    INT AUTO_INCREMENT PRIMARY KEY,
     `category_id`   INT NULL,
     `brand`         VARCHAR(50)  NOT NULL,
@@ -106,8 +106,8 @@ CREATE TABLE `vehicles` (
 -- ------------------------------------------------------------------------------
 -- 6. Table: vehicle_diagnostics (Real-time telemetry / diagnostic data)
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `vehicle_diagnostics`;
-CREATE TABLE `vehicle_diagnostics` (
+-- DROP TABLE IF EXISTS `vehicle_diagnostics`;
+CREATE TABLE IF NOT EXISTS `vehicle_diagnostics` (
     `diag_id`                   INT AUTO_INCREMENT PRIMARY KEY,
     `vehicle_id`                INT NOT NULL,
     `engine_temperature`        DECIMAL(5, 2) DEFAULT 90.00,
@@ -125,8 +125,8 @@ CREATE TABLE `vehicle_diagnostics` (
 -- ------------------------------------------------------------------------------
 -- 7. Table: orders (Rentals / Bookings)
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE `orders` (
+-- DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
     `order_id`        INT AUTO_INCREMENT PRIMARY KEY,
     `order_number`    VARCHAR(40)  NOT NULL UNIQUE,
     `customer_id`     INT NOT NULL,
@@ -149,8 +149,8 @@ CREATE TABLE `orders` (
 -- ------------------------------------------------------------------------------
 -- 8. Table: payments
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `payments`;
-CREATE TABLE `payments` (
+-- DROP TABLE IF EXISTS `payments`;
+CREATE TABLE IF NOT EXISTS `payments` (
     `payment_id`            INT AUTO_INCREMENT PRIMARY KEY,
     `order_id`              INT NOT NULL,
     `amount`                DECIMAL(10, 2) NOT NULL,
@@ -165,8 +165,8 @@ CREATE TABLE `payments` (
 -- ------------------------------------------------------------------------------
 -- 9. Table: reviews (Comments & Ratings)
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `reviews`;
-CREATE TABLE `reviews` (
+-- DROP TABLE IF EXISTS `reviews`;
+CREATE TABLE IF NOT EXISTS `reviews` (
     `review_id`    INT AUTO_INCREMENT PRIMARY KEY,
     `order_id`     INT NOT NULL,
     `user_id`      INT NOT NULL,
@@ -182,8 +182,8 @@ CREATE TABLE `reviews` (
 -- ------------------------------------------------------------------------------
 -- 10. Table: messages
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `messages`;
-CREATE TABLE `messages` (
+-- DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
     `message_id`  INT AUTO_INCREMENT PRIMARY KEY,
     `sender_id`   INT NOT NULL,
     `receiver_id` INT NOT NULL,
@@ -199,8 +199,8 @@ CREATE TABLE `messages` (
 -- ------------------------------------------------------------------------------
 -- 11. Table: system_logs
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `system_logs`;
-CREATE TABLE `system_logs` (
+-- DROP TABLE IF EXISTS `system_logs`;
+CREATE TABLE IF NOT EXISTS `system_logs` (
     `log_id`      INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`     INT NULL,
     `action_type` VARCHAR(50) NOT NULL,
@@ -214,8 +214,8 @@ CREATE TABLE `system_logs` (
 -- ------------------------------------------------------------------------------
 -- 12. Table: todos
 -- ------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `todos`;
-CREATE TABLE `todos` (
+-- DROP TABLE IF EXISTS `todos`;
+CREATE TABLE IF NOT EXISTS `todos` (
     `todo_id`      INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`      INT NOT NULL,
     `title`        VARCHAR(150) NOT NULL,
@@ -238,9 +238,9 @@ INSERT INTO `vehicle_categories` (`category_id`, `name`, `description`) VALUES
 (4, 'Electric', 'Eco-friendly modern electric vehicles with high efficiency');
 
 -- Insert default Admin user (Password is 'admin123' hashed with jBCrypt)
--- Hash generated via BCrypt: $2a$10$wT33mKj21k26r5h3d5YpweaVvR9g4PmsO2xJ1qWl7OaH.fW0gG2K.
+-- Hash generated via BCrypt for 'admin123'
 INSERT INTO `users` (`user_id`, `username`, `password_hash`, `email`, `phone`, `full_name`, `role`, `status`) VALUES
-(1, 'admin', '$2a$10$wT33mKj21k26r5h3d5YpweaVvR9g4PmsO2xJ1qWl7OaH.fW0gG2K.', 'admin@fleetms.com', '+1-555-0100', 'System Administrator', 'ADMIN', 'ACTIVE');
+(1, 'admin', '$2a$10$4ruqE8FlnERNCuIW/6pI6.1rlZmJiG/plwFwif5KPGxjwbM9Sm6je', 'admin@fleetms.com', '+1-555-0100', 'System Administrator', 'ADMIN', 'ACTIVE');
 
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS = 1;

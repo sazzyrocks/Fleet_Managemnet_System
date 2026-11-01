@@ -73,7 +73,7 @@ public class DiagnosticDataController extends Controller {
             Label title = new Label("Vehicle #" + d.getVehicleId() + " — Telemetry Check");
             title.setStyle("-fx-font-weight: bold; -fx-text-fill: #1d2129;");
 
-            Label odo = new Label("Mileage: " + (d.getOdometer() != null ? d.getOdometer() + " km" : "N/A") + " | Fuel: " + (d.getFuelLevelPercent() != null ? d.getFuelLevelPercent() + "%" : "100%"));
+            Label odo = new Label("Temp: " + (d.getEngineTemperature() != null ? d.getEngineTemperature() + " °C" : "N/A") + " | Fuel: " + (d.getFuelLevelPercent() != null ? d.getFuelLevelPercent() + "%" : "100%") + " | Battery: " + (d.getBatteryHealthPercent() != null ? d.getBatteryHealthPercent() + "%" : "100%"));
             odo.setStyle("-fx-text-fill: #86909c; -fx-font-size: 12px;");
 
             card.getChildren().addAll(title, odo);

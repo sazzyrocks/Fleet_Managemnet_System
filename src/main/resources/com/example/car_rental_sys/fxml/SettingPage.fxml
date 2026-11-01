@@ -5,7 +5,15 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="settingPane" prefHeight="700.0" prefWidth="820.0" style="-fx-background-color: transparent;" stylesheets="@../style/settingComponentLight.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.car_rental_sys.controllers.SettingPageController">
+<Pane fx:id="settingPane" prefHeight="700.0" prefWidth="820.0" style="-fx-background-color: white;" stylesheets="@../style/settingComponentLight.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.car_rental_sys.controllers.SettingPageController">
+   <Button fx:id="backBtn" layoutX="670.0" layoutY="30.0" mnemonicParsing="false"
+           onMouseClicked="#backToDashboardClicked" prefHeight="35.0" prefWidth="120.0"
+           style="-fx-background-color: #165DFF; -fx-background-radius: 6px; -fx-cursor: hand;"
+           text="← Dashboard" textFill="WHITE">
+      <font>
+         <Font name="Arial Bold" size="13.0"/>
+      </font>
+   </Button>
    <Pane fx:id="switchPaneOne" layoutX="70.0" layoutY="87.0" prefHeight="16.0" prefWidth="30.0" />
    <Label layoutX="57.0" layoutY="115.0" styleClass="lblSecSettingText" text="Allow others to search yourself." textFill="#86909c">
       <font>

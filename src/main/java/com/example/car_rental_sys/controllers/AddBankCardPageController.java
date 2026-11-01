@@ -100,7 +100,16 @@ public class AddBankCardPageController extends Controller {
 
     private void attachEvents() {
         if (backBtn != null) {
-            backBtn.setOnMouseClicked(event -> SceneManager.switchScene("BillingComponent.fxml"));
+            backBtn.setOnMouseClicked(event -> {
+                User currentUser = ServiceFactory.getInstance().getAuthService().getCurrentUser();
+                if (currentUser != null && currentUser.getRole() == com.example.car_rental_sys.model.Role.ADMIN) {
+                    SceneManager.switchScene("adminServicePage.fxml");
+                } else if (currentUser != null && currentUser.getRole() == com.example.car_rental_sys.model.Role.DRIVER) {
+                    SceneManager.switchScene("driverServicePage.fxml");
+                } else {
+                    SceneManager.switchScene("customerServicePage.fxml");
+                }
+            });
         }
         if (addCardButton != null) {
             addCardButton.setOnAction(e -> handleAddCard());

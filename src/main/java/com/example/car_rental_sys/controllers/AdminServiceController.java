@@ -81,6 +81,26 @@ public class AdminServiceController extends Controller {
         }
     }
 
+    public void showSettingPage() {
+        showSettingsView("SettingPage.fxml");
+        loadSubView(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showAccSecurity() {
+        showSettingsView("AccountSecurityPage.fxml");
+        loadSubView(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showPasswordPage() {
+        showSettingsView("PasswordPage.fxml");
+        loadSubView(middlePanel, "MiddleBar.fxml");
+    }
+
+    public void showProfilePage() {
+        showSettingsView("PersonalInfoPage.fxml");
+        loadSubView(middlePanel, "InfoMiddleBar.fxml");
+    }
+
     private void loadSubView(Pane targetPane, String fxmlName) {
         try {
             URL resource = getClass().getResource("/com/example/car_rental_sys/fxml/" + fxmlName);

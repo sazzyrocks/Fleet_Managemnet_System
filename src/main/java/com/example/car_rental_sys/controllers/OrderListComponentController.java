@@ -51,6 +51,9 @@ public class OrderListComponentController extends Controller {
     private Button btnCancel;
 
     @FXML
+    private Button btnRentCar;
+
+    @FXML
     private Pane tableContainer;
 
     @FXML
@@ -66,6 +69,23 @@ public class OrderListComponentController extends Controller {
     public void initialize() {
         setupTable();
         loadOrders();
+    }
+
+    @FXML
+    private void backToDashboardClicked(MouseEvent event) {
+        User user = ServiceFactory.getInstance().getAuthService().getCurrentUser();
+        if (user != null && user.getRole() == com.example.car_rental_sys.model.Role.ADMIN) {
+            SceneManager.switchScene("adminServicePage.fxml");
+        } else if (user != null && user.getRole() == com.example.car_rental_sys.model.Role.DRIVER) {
+            SceneManager.switchScene("driverServicePage.fxml");
+        } else {
+            SceneManager.switchScene("customerServicePage.fxml");
+        }
+    }
+
+    @FXML
+    private void rentCarClicked(MouseEvent event) {
+        SceneManager.switchScene("carsListPage.fxml");
     }
 
     private void setupTable() {

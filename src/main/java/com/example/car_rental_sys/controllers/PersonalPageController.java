@@ -3,6 +3,7 @@ package com.example.car_rental_sys.controllers;
 import com.example.car_rental_sys.concurrency.AsyncExecutor;
 import com.example.car_rental_sys.dao.DAOFactory;
 import com.example.car_rental_sys.dao.UserDAO;
+import com.example.car_rental_sys.model.Role;
 import com.example.car_rental_sys.model.User;
 import com.example.car_rental_sys.service.ServiceFactory;
 import com.example.car_rental_sys.util.AlertHelper;
@@ -63,6 +64,9 @@ public class PersonalPageController extends Controller {
 
     @FXML
     private Button ivCancelBtn;
+
+    @FXML
+    private Button backBtn;
 
     @FXML
     private Label aboutWordCount;
@@ -143,8 +147,31 @@ public class PersonalPageController extends Controller {
     }
 
     @FXML
+    private void backToDashboardClicked(MouseEvent event) {
+        navigateBack();
+    }
+
+    @FXML
     private void cancelClicked(MouseEvent event) {
-        loadUserData();
+        navigateBack();
+    }
+
+    private void navigateBack() {
+        if (currentUser != null && currentUser.getRole() != null) {
+            switch (currentUser.getRole()) {
+                case ADMIN:
+                    SceneManager.switchScene("adminServicePage.fxml");
+                    return;
+                case DRIVER:
+                    SceneManager.switchScene("driverServicePage.fxml");
+                    return;
+                case CUSTOMER:
+                default:
+                    SceneManager.switchScene("customerServicePage.fxml");
+                    return;
+            }
+        }
+        SceneManager.switchScene("customerServicePage.fxml");
     }
 
     @FXML

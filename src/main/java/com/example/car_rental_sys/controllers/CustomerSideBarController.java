@@ -111,7 +111,13 @@ public class CustomerSideBarController extends Controller {
 
     private void attachNavigationHandlers() {
         if (item1 != null) {
-            item1.setOnMouseClicked(event -> SceneManager.switchScene("PersonalInfoPage.fxml"));
+            item1.setOnMouseClicked(event -> {
+                if (CustomerServiceController.instance != null) {
+                    CustomerServiceController.instance.showProfilePage();
+                } else {
+                    SceneManager.switchScene("PersonalInfoPage.fxml");
+                }
+            });
         }
         if (item2 != null) {
             item2.setOnMouseClicked(event -> SceneManager.switchScene("messagePage.fxml"));
@@ -123,7 +129,13 @@ public class CustomerSideBarController extends Controller {
             item4.setOnMouseClicked(event -> SceneManager.switchScene("showOrderComponent.fxml"));
         }
         if (item5 != null) {
-            item5.setOnMouseClicked(event -> SceneManager.switchScene("SettingPage.fxml"));
+            item5.setOnMouseClicked(event -> {
+                if (CustomerServiceController.instance != null) {
+                    CustomerServiceController.instance.showSettingPage();
+                } else {
+                    SceneManager.switchScene("SettingPage.fxml");
+                }
+            });
         }
         if (item6 != null) {
             item6.setOnMouseClicked(event -> handleLogout());

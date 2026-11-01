@@ -18,10 +18,9 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) {
         LOGGER.info("Starting Fleet Management System desktop client...");
 
-        // Set up undecorated, modern window with custom titlebar
-        stage.initStyle(StageStyle.UNDECORATED);
+        // Standard desktop window with OS titlebar (minimize, maximize, close, drag)
         stage.setTitle("Fleet Management System");
-        stage.setResizable(false);
+        stage.setResizable(true);
 
         SceneManager.setPrimaryStage(stage);
         SceneManager.setAppIcon();

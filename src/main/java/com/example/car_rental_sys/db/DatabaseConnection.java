@@ -128,4 +128,16 @@ public class DatabaseConnection {
             }
         }
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
